@@ -1,0 +1,6 @@
+daformer_gta_base.csv: 直接使用复现的daformer baseline进行city train预测结果图像级的iou
+daformer_gta_basef1.csv: 在上述的基础上使用sam默认参数进行f1融合, 图像级的iou
+compare3.xlsx 上述两个文件图像级iou的对比
+record3.csv 根据可视化结果和iou的对比选择改善好的图片
+
+daformer_gta_basef1_refine.csv: refine后缀表示使用ssam中的参数，降低阈值，增加采样点

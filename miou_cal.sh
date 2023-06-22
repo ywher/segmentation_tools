@@ -8,9 +8,9 @@
 # seg: daformer gta base; fusion mode: 2 ; sam mask: refine
 python miou_cal.py \
 --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
---pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/debug2/trainID_bg' \
+--pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/debug4/trainID_bg' \
 --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
---save_path 'miou_dataset/daformer_gta_f2_refine.txt'
+--save_path 'miou_dataset/daformer_gta_f2_refine_nameorder.txt'
 
 
 # python miou_cal.py \

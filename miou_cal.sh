@@ -6,11 +6,11 @@
 # --save_path 'miou_dataset/daformer_gta_f1_refine.txt'
 
 # seg: daformer gta base; fusion mode: 2 ; sam mask: refine
-python miou_cal.py \
---gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
---pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/debug_mode1_wosamrefine/trainID_bg' \
---devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
---save_path 'miou_dataset/daformer_gta_mode1_wosamrefine.txt'
+# python miou_cal.py \
+# --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
+# --pred_dir '/media/ywh/1/yanweihao/projects/uda/DAFormer/work_dirs/local-exp7/230522_2312_gta2cs_dacs_a999_fdthings_rcs001_cpl_daformer_sepaspp_mitb5_poly10warm_s0_ea659/trainid' \
+# --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
+# --save_path 'miou_dataset/daformer_gta_base.txt'
 
 
 # python miou_cal.py \
@@ -19,11 +19,11 @@ python miou_cal.py \
 # --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
 # --save_path './mic_gta_f1_result2.txt'
 
-# python miou_cal.py \
-# --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
-# --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/train_fusion_syn_mic_base/trainID_bg' \
-# --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
-# --save_path './mic_syn_basef1_result.txt'
+python miou_cal.py \
+--gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
+--pred_dir '/media/ywh/1/yanweihao/projects/uda/DAFormer/work_dirs/local-exp7/syn/230526_1633_syn2cs_dacs_a999_fdthings_rcs001_cpl_daformer_sepaspp_mitb5_poly10warm_s0_103e3/pred_trainid_new' \
+--devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
+--save_path 'miou_dataset/dafomer_syn_base_result_new.txt'
 
 # python miou_cal.py \
 # --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_darmstadt' \

@@ -19,11 +19,25 @@
 # --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
 # --save_path './mic_gta_f1_result2.txt'
 
-python miou_cal.py \
---gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
---pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/debug_syn/fusion5_trainid' \
---devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
---save_path 'miou_dataset/dafomer_syn_f5_result.txt'
+# gta
+for i in 1 2 3 4 5
+do
+    python miou_cal.py \
+    --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
+    --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/debug_gta/fusion'$i'_trainid' \
+    --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
+    --save_path 'miou_dataset/daformer_gta_f'$i'_result.txt'
+done
+
+# synthia
+# for i in 1 2 3 4 5
+# do
+#     python miou_cal.py \
+#     --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
+#     --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/debug_syn_tmp2/fusion'$i'_trainid' \
+#     --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
+#     --save_path 'miou_dataset/dafomer_syn_f'$i'_result.txt'
+# done
 
 # python miou_cal.py \
 # --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_darmstadt' \

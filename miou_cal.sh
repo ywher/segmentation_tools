@@ -21,9 +21,9 @@
 
 python miou_cal.py \
 --gt_dir '/mnt/pool1/Dataset/cityscape_original/gtFine_trainvaltest/gtFine/train_all' \
---pred_dir '/home/cxy/projects/SAM4UDASS/outputs/cityscapes/debug_sam_tmp2/trainID_bg' \
+--pred_dir '/home/cxy/projects/SAM4UDASS/outputs/cityscapes/debug_sam_tmp1/trainID_bg' \
 --devkit_dir '/home/cxy/projects/segmentation_tools/utils' \
---save_path 'miou_dataset/dafomer_syn_cxy_result.txt'
+--save_path 'miou_dataset/dafomer_syn_cxy_result2.txt'
 
 # python miou_cal.py \
 # --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_darmstadt' \

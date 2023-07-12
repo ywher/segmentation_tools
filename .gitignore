@@ -1,0 +1,7 @@
+miou_cal.sh
+show_result.sh
+data.csv
+
+#folder
+miou_dataset
+__pycache__

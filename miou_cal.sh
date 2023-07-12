@@ -19,6 +19,25 @@
 # --devkit_dir '/home/cxy/projects/segmentation_tools/utils' \
 # --save_path './mic_gta_f1_result2.txt'
 
+# gta
+# for i in 1 2 3 4 5
+# do
+#     python miou_cal.py \
+#     --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
+#     --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/debug_gta2/fusion'$i'_trainid' \
+#     --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
+#     --save_path 'miou_dataset/daformer_gta_f'$i'_result.txt'
+# done
+
+# for i in 1 2 3 4 5
+# do
+#     python miou_cal.py \
+#     --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
+#     --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/sepico_gta/fusion'$i'_trainid' \
+#     --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
+#     --save_path 'miou_dataset/sepicov2_gta_f'$i'_result.txt'
+# done
+
 python miou_cal.py \
 --gt_dir '/mnt/pool1/Dataset/cityscape_original/gtFine_trainvaltest/gtFine/train_all' \
 --pred_dir '/home/cxy/projects/SAM4UDASS/outputs/cityscapes/debug_sam_tmp1/trainID_bg' \

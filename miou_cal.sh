@@ -2,40 +2,40 @@
 # python miou_cal.py \
 # --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
 # --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/train_fusion_gta_daformer_f1_refine/trainID_bg' \
-# --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
+# --devkit_dir '/home/cxy/projects/segmentation_tools/utils' \
 # --save_path 'miou_dataset/daformer_gta_f1_refine.txt'
 
 # seg: daformer gta base; fusion mode: 2 ; sam mask: refine
 # python miou_cal.py \
 # --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
 # --pred_dir '/media/ywh/1/yanweihao/projects/uda/DAFormer/work_dirs/local-exp7/230522_2312_gta2cs_dacs_a999_fdthings_rcs001_cpl_daformer_sepaspp_mitb5_poly10warm_s0_ea659/trainid' \
-# --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
+# --devkit_dir '/home/cxy/projects/segmentation_tools/utils' \
 # --save_path 'miou_dataset/daformer_gta_base.txt'
 
 
 # python miou_cal.py \
 # --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
 # --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/train_fusion_gta_mic_base2/trainID_bg' \
-# --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
+# --devkit_dir '/home/cxy/projects/segmentation_tools/utils' \
 # --save_path './mic_gta_f1_result2.txt'
 
 python miou_cal.py \
---gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
---pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/debug_syn/fusion5_trainid' \
---devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
---save_path 'miou_dataset/dafomer_syn_f5_result.txt'
+--gt_dir '/mnt/pool1/Dataset/cityscape_original/gtFine_trainvaltest/gtFine/train_all' \
+--pred_dir '/home/cxy/projects/SAM4UDASS/outputs/cityscapes/debug_sam_tmp2/trainID_bg' \
+--devkit_dir '/home/cxy/projects/segmentation_tools/utils' \
+--save_path 'miou_dataset/dafomer_syn_cxy_result.txt'
 
 # python miou_cal.py \
 # --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_darmstadt' \
 # --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/train_fusion_darmstadt_1/trainID_bg' \
-# --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
+# --devkit_dir '/home/cxy/projects/segmentation_tools/utils' \
 # --save_path './daformer_gtaf1_darmstadt1_result.txt'
 
 #acdc
 # python miou_cal.py \
 # --gt_dir '/media/ywh/1/yanweihao/dataset/acdc/gt/train' \
 # --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/ACDC/train_fusion2/trainID_bg' \
-# --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
+# --devkit_dir '/home/cxy/projects/segmentation_tools/utils' \
 # --save_path './daformer_acdc_f1_ssam_result.txt'
 
 # --pred_dir '/media/ywh/1/yanweihao/projects/uda/DAFormer/work_dirs/local-exp8/230527_0645_cs2acdc_dacs_a999_fdthings_rcs001_cpl_daformer_sepaspp_mitb5_poly10warm_s0_f753f/pred_trainid' \

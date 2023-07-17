@@ -20,7 +20,6 @@
 # --save_path './mic_gta_f1_result2.txt'
 
 # gta
-# dafromer
 # for i in 1 2 3 4 5
 # do
 #     python miou_cal.py \
@@ -30,7 +29,6 @@
 #     --save_path 'miou_dataset/daformer_gta_f'$i'_result.txt'
 # done
 
-# mic
 # for i in 1 2 3 4 5
 # do
 #     python miou_cal.py \
@@ -40,22 +38,12 @@
 #     --save_path 'miou_dataset/mic_gta_f'$i'_new_result.txt'
 # done
 
-# sepico
 # python miou_cal.py \
 # --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
 # --pred_dir '/media/ywh/1/yanweihao/projects/uda/SePiCo/work_dirs/local-exp1/230707_0324_dlv2_proj_r101v1c_sepico_DistCL-reg-w1.0-start-iter3000-tau100.0-l3-w1.0_rcs0.01_cpl_self_adamw_6e-05_pmT_poly10warm_1x2_40k_gta2cs_seed76_36629/pred_trainid' \
 # --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
 # --save_path 'miou_dataset/sepicov2_gta_base_result.txt'
 
-# tufl
-for i in 1 2 3 4 5
-do
-    python miou_cal.py \
-    --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
-    --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/tufl_gta_new/fusion'$i'_trainid' \
-    --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
-    --save_path 'miou_dataset/tufl_gta_f'$i'_new2_result.txt'
-done
 
 # synthia
 # for i in 1 2 3 4 5
@@ -72,10 +60,16 @@ done
 # do
 #     python miou_cal.py \
 #     --gt_dir '/media/ywh/1/yanweihao/projects/uda/DAFormer/data/acdc/gt/train' \
-#     --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/debug_acdc/fusion'$i'_trainid' \
+#     --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/mic_acdc/fusion'$i'_trainid' \
 #     --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
-#     --save_path 'miou_dataset/daformer_acdc_f'$i'_result.txt'
+#     --save_path 'miou_dataset/mic_acdc_f'$i'_result.txt'
 # done
+
+python miou_cal.py \
+--gt_dir '/media/ywh/1/yanweihao/projects/uda/DAFormer/data/acdc/gt/train' \
+--pred_dir '/media/ywh/1/yanweihao/projects/uda/MIC/seg/work_dirs/local-exp80/230713_0405_csHR2acdcHR_1024x1024_dacs_a999_fdthings_rcs001-20_m64-07-sep_hrda1-512-01_daformer_sepaspp_sl_mitb5_poly10warm_s0_0b9fc/pred_trainid' \
+--devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
+--save_path 'miou_dataset/mic_acdc_base_result.txt'
 
 # python miou_cal.py \
 # --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_darmstadt' \

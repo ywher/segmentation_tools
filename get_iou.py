@@ -48,5 +48,10 @@ def get_iou_data(file_name):
 
 if __name__ == '__main__':
     # file_name = 'miou_dataset/daformer/acdc/new1/daformer_acdc_f1_result.txt'
-    file_name = 'miou_dataset/daformer/gta/new_4/daformer_gta_f3_result.txt'
+    # file_name = 'miou_dataset/daformer/gta/new_4/daformer_gta_f3_result.txt'
+    # file_name = 'miou_dataset/mic_gta_f3_result.txt'
+    # file_name = 'miou_dataset/mic/gta/new1/mic_gta_f3_result.txt'
+    # file_name = 'miou_dataset/mic/gta/mic_gta_base2_result.txt'
+    # file_name = 'miou_dataset/mic/acdc/mic_acdc_f3_result.txt'
+    file_name = 'miou_dataset/tufl/tufl_gta_f5_new_result.txt'
     get_iou_data(file_name)

@@ -1,0 +1,20 @@
+Mean	69.49
+sky	90.54
+car	89.63
+train	89.58
+building	88.94
+road	88.91
+vegetation	79.36
+bus	78.85
+truck	75.29
+person	71.7
+traffic sign	68.41
+sidewalk	63.18
+bicycle	62.24
+terrain	61.05
+pole	58.37
+wall	57.75
+motorcycle	54.07
+traffic light	53.08
+rider	46.45
+fence	42.92

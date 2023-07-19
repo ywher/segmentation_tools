@@ -31,6 +31,12 @@
 # done
 
 # mic
+python miou_cal.py \
+--gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
+--pred_dir '/media/ywh/1/yanweihao/projects/uda/MIC/seg/work_dirs/local-exp80/230716_1343_gtaHR2csHR_1024x1024_dacs_a999_fdthings_rcs001-20_cpl2_m64-07-spta_hrda1-512-01_daformer_sepaspp_sl_mitb5_poly10warm_s0_ea911/pred_trainid' \
+--devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
+--save_path 'miou_dataset/mic_gta_base3_result.txt'
+
 # for i in 1 2 3 4 5
 # do
 #     python miou_cal.py \
@@ -48,14 +54,14 @@
 # --save_path 'miou_dataset/sepicov2_gta_base_result.txt'
 
 # tufl
-for i in 1 2 3 4 5
-do
-    python miou_cal.py \
-    --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
-    --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/tufl_gta_new/fusion'$i'_trainid' \
-    --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
-    --save_path 'miou_dataset/tufl_gta_f'$i'_new2_result.txt'
-done
+# for i in 1 2 3 4 5
+# do
+#     python miou_cal.py \
+#     --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
+#     --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/tufl_gta_new/fusion'$i'_trainid' \
+#     --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
+#     --save_path 'miou_dataset/tufl_gta_f'$i'_new2_result.txt'
+# done
 
 # synthia
 # for i in 1 2 3 4 5

@@ -1,2 +1,2 @@
-Mean,train,sky,building,road,car,bus,vegetation,truck,person,traffic sign,bicycle,terrain,sidewalk,pole,wall,traffic light,motorcycle,rider,fence
-65.26,89.11,89.01,87.73,86.71,86.06,78.79,78.05,72.29,63.92,63.32,59.04,57.91,54.48,53.72,50.32,48.14,46.07,44.85,30.47
+Mean,road,sidewalk,building,wall,fence,pole,traffic light,traffic sign,vegetation,terrain,sky,person,rider,car,truck,bus,train,motorcycle,bicycle
+67.75,88.82,60.61,87.16,56.69,38.8,53.66,62.04,61.5,74.41,59.52,86.22,67.69,49.18,88.37,74.81,75.31,86.48,54.71,61.27

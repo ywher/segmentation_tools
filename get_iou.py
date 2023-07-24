@@ -53,5 +53,6 @@ if __name__ == '__main__':
     # file_name = 'miou_dataset/mic/gta/new1/mic_gta_f3_result.txt'
     # file_name = 'miou_dataset/mic/gta/mic_gta_base2_result.txt'
     # file_name = 'miou_dataset/mic/acdc/mic_acdc_f3_result.txt'
-    file_name = 'miou_dataset/tufl/tufl_gta_f5_new_result.txt'
+    # file_name = 'miou_dataset/tufl/tufl_gta_f5_new_result.txt'
+    file_name = 'miou_dataset/mic/gta/new2/mic_gta_f5_new_result.txt'
     get_iou_data(file_name)

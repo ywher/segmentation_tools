@@ -71,10 +71,14 @@ if __name__ == "__main__":
     # 输入1：5个文件夹路径，按文件名排序后对应的图片
     # ground truth
     folder1_path = "/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/val_all_color"
-    folder2_path = "/home/ywh/Documents/paper_writing/media/gta_comparison/da_base_predval/preds_color"
-    folder3_path = "/home/ywh/Documents/paper_writing/media/gta_comparison/da_best_predval/preds_color"
-    folder4_path = "/home/ywh/Documents/paper_writing/media/gta_comparison/mic_base_predval/preds_color"
-    folder5_path = "/home/ywh/Documents/paper_writing/media/gta_comparison/mic_best_predval/preds_color"
+    # folder2_path = "/home/ywh/Documents/paper_writing/media/gta_comparison/da_base_predval/preds_color"
+    # folder3_path = "/home/ywh/Documents/paper_writing/media/gta_comparison/da_best_predval/preds_color"
+    # folder4_path = "/home/ywh/Documents/paper_writing/media/gta_comparison/mic_base_predval/preds_color"
+    # folder5_path = "/home/ywh/Documents/paper_writing/media/gta_comparison/mic_best_predval/preds_color"
+    folder2_path = "/home/ywh/Documents/paper_writing/media/syn_comparison/da_base/preds_color"
+    folder3_path = "/home/ywh/Documents/paper_writing/media/syn_comparison/da_best/preds_color"
+    folder4_path = "/home/ywh/Documents/paper_writing/media/syn_comparison/mic_base/preds_color"
+    folder5_path = "/home/ywh/Documents/paper_writing/media/syn_comparison/mic_best/preds_color"
     folders = [folder1_path, folder2_path, folder3_path, folder4_path, folder5_path]
 
     # 输入2：图像resize的尺寸
@@ -82,5 +86,5 @@ if __name__ == "__main__":
     gap_size = 10
 
     # 输入3：保存csv文件的路径，即输出路径
-    output_csv_path = "output.csv"
+    output_csv_path = "output_syn.csv"
     main(folders, resize_size, output_csv_path, gap_size)

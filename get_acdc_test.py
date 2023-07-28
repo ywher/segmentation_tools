@@ -1,7 +1,7 @@
 import csv
 
 filename = 'acdc.txt'
-output_filename = 'acdc.csv'
+output_filename = 'outputs/acdc.csv'
 
 categories = []
 values = []

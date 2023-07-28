@@ -21,23 +21,23 @@
 
 # gta
 # dafromer
-# for i in 1 2 3 4 5
-# do
-#     python miou_cal.py \
-#     --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
-#     --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/daformer_gta_beta0.95/fusion'$i'_trainid' \
-#     --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
-#     --save_path 'miou_dataset/daformer_gta_f'$i'_result_beta0.95.txt'
-# done
-
 # for i in 1 2 3
 # do
 #     python miou_cal.py \
 #     --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
-#     --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/train_fusion_gta_dino4/fusion'$i'_trainid' \
+#     --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/alpha_ablation/daformer_gta_alpha0.35/fusion'$i'_trainid' \
 #     --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
-#     --save_path 'miou_dataset/daformer_gta_f'$i'_dino_new5_result.txt'
+#     --save_path 'miou_dataset/daformer_gta_f'$i'_result_alpha0.35.txt'
 # done
+
+for i in 1 2 3
+do
+    python miou_cal.py \
+    --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
+    --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/beta_ablation/daformer_gta_beta0.99/fusion'$i'_trainid' \
+    --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
+    --save_path 'miou_dataset/daformer_gta_f'$i'_result_beta0.99.txt'
+done
 
 # python miou_cal.py \
 # --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
@@ -70,14 +70,19 @@
 # --save_path 'miou_dataset/sepicov2_gta_base_result.txt'
 
 # tufl
-for i in 1 2 3
-do
-    python miou_cal.py \
-    --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
-    --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/tufl/tufl_synthia/fusion'$i'_trainid' \
-    --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
-    --save_path 'miou_dataset/tufl_syn_f'$i'_result.txt'
-done
+# for i in 1 2 3
+# do
+#     python miou_cal.py \
+#     --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
+#     --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/tufl/tufl_synthia/fusion'$i'_trainid' \
+#     --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
+#     --save_path 'miou_dataset/tufl_syn_f'$i'_result.txt'
+# done
+# python miou_cal.py \
+# --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
+# --pred_dir '/media/ywh/1/yanweihao/projects/uda/BiSeNet-uda/outputs/Synthia_deeplab_BiSeNet_20kunsup_focal_0.8_0.05/pred/pred_trainid_transfer' \
+# --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
+# --save_path 'miou_dataset/tufl_syn_base_result.txt'
 
 # synthia
 # for i in 1 2 3 4 5

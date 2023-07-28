@@ -4,5 +4,6 @@ data.csv
 acdc.csv
 
 #folder
-miou_dataset
+miou_dataset/
+outputs/
 __pycache__

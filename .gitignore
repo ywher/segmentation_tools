@@ -6,4 +6,5 @@ acdc.csv
 #folder
 miou_dataset/
 outputs/
+images/
 __pycache__

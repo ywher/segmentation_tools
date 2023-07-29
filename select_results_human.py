@@ -1,10 +1,12 @@
 '''
-function:   输入: 5个文件夹, 显示的图片大小, 输出的csv文件名字, 以及图片之间的间隔, 
-            功能: 每个文件夹下有一系列图片, 每个文件夹下的图片按照名字排序后是一一对应的, 
-            然后将这5个文件夹下的图片按照顺序水平拼接在一起, 然后显示出来, 
-            然后可以选择图片, 按键a和d分别表示上一张和下一张图片, enter键表示选择当前图片, esc键表示退出,
-            选择的图片名字保存在csv文件中
-            输出: 选择的图片名字保存在csv文件中
+输入: 5个文件夹, 显示的图片大小, 输出的csv文件名字, 以及图片之间的间隔, 
+            
+功能: 每个文件夹下有一系列图片, 每个文件夹下的图片按照名字排序后是一一对应的, 
+然后将这5个文件夹下的图片按照顺序水平拼接在一起, 然后显示出来, 
+然后可以选择图片, 按键a和d分别表示上一张和下一张图片, enter键表示选择当前图片, esc键表示退出,
+选择的图片名字保存在csv文件中
+            
+输出: 选择的图片名字保存在csv文件中
 '''
 import cv2
 import os
@@ -103,18 +105,21 @@ def main(folders, resize_size, output_csv_path, gap_size):
 
 if __name__ == "__main__":
     # Input 1: List of 5 folder paths, each containing images sorted by file name.
-    folder1_path = "/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/val_all_color"
-    folder2_path = "/home/ywh/Documents/paper_writing/media/syn_comparison/da_base/preds_color"
-    folder3_path = "/home/ywh/Documents/paper_writing/media/syn_comparison/da_best/preds_color"
-    folder4_path = "/home/ywh/Documents/paper_writing/media/syn_comparison/mic_base/preds_color"
-    folder5_path = "/home/ywh/Documents/paper_writing/media/syn_comparison/mic_best/preds_color"
-    folders = [folder1_path, folder2_path, folder3_path, folder4_path, folder5_path]
-
+    # folder1_path = "/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/val_all_color"
+    # folder2_path = "/home/ywh/Documents/paper_writing/media/syn_comparison/da_base/preds_color"
+    # folder3_path = "/home/ywh/Documents/paper_writing/media/syn_comparison/da_best/preds_color"
+    # folder4_path = "/home/ywh/Documents/paper_writing/media/syn_comparison/mic_base/preds_color"
+    # folder5_path = "/home/ywh/Documents/paper_writing/media/syn_comparison/mic_best/preds_color"
+    # folders = [folder1_path, folder2_path, folder3_path, folder4_path, folder5_path]
+    folder1_path = '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_gt_color'
+    folder2_path = '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/daformer_gta_sam/fusion3_majority_color'
+    folder3_path = '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/daformer_gta_sam/fusion3_color'
+    folders = [folder1_path, folder2_path, folder3_path]
     # Input 2: Image resize size
     resize_size = (360, 180)  # (width, height)
 
     # Input 3: Output path for saving the CSV file
-    output_csv_path = "output_syn.csv"
+    output_csv_path = "output_sam.csv"
 
     # Run the main function
     main(folders, resize_size, output_csv_path, gap_size=10)

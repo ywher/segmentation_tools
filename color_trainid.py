@@ -3,7 +3,12 @@ import numpy as np
 import os
 import cv2
 import tqdm
-
+'''
+输入:
+    分割结果图路径soure_folder, 分割结果图后缀gt_suffix, 输出路径save_folder
+功能:
+    对分割结果图按照cityscapes类别和颜色的对应关系进行上色, 并保存到save_folder
+'''
 
 def color_segmentation(segmentation):
     # get the color segmentation result, initial the color segmentation result with black (0,0,0)
@@ -50,8 +55,8 @@ def main(source_folder, gt_suffix, save_folder):
 
 
 if __name__ == '__main__':
-    source_folder = '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/val_all'
+    source_folder = '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/daformer_gta_sam/fusion3_trainid'
     # gt_suffix = '_labelTrainIds.png'
     gt_suffix = '.png'
-    save_folder = '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/val_all_color'
+    save_folder = '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/daformer_gta_sam/fusion3_color'
     main(source_folder, gt_suffix, save_folder)  # 00001_labelTrainIds.png

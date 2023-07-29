@@ -1,4 +1,12 @@
 import csv
+'''
+输入:
+    filename: txt文件路径, acdc test上的结果
+    output_filename: 保存结果的csv文件路径
+功能
+    将txt文件中的数据保存到csv文件中
+    主要用于保存acdc test evaluation server上的评估结果
+'''
 
 filename = 'acdc.txt'
 output_filename = 'outputs/acdc.csv'

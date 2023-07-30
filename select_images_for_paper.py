@@ -62,7 +62,9 @@ def copy_and_rename_images(input_folders, output_folder, image_names, image_suff
 
         # Resize and save the merged image by concatenating two images side by side
         target_width, target_height = target_size
-        merged_image = Image.new("RGB", (target_width * 2, target_height * 3))
+        col = 2
+        row = (len(input_folders) + 1) // col
+        merged_image = Image.new("RGB", (target_width * col, target_height * row))
 
         for i in range(len(input_file_paths)):
             img = resize_image(input_file_paths[i], target_size)
@@ -76,38 +78,82 @@ def copy_and_rename_images(input_folders, output_folder, image_names, image_suff
 
 # The main entry point of the script
 if __name__ == "__main__":
+    # # Input 1: Original image path
+    # input_folder1 = "/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/leftImg8bit/val_all"
+    # # Input 2: Ground truth path
+    # input_folder2 = "/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/val_all_color"
+    # # Input 3: Path for prediction result 1
+    # input_folder3 = "/home/ywh/Documents/paper_writing/media/syn_comparison/da_base/preds_color"
+    # # Input 4: Path for prediction result 2
+    # input_folder4 = "/home/ywh/Documents/paper_writing/media/syn_comparison/da_best/preds_color"
+    # # Input 5: Path for prediction result 3
+    # input_folder5 = "/home/ywh/Documents/paper_writing/media/syn_comparison/mic_base/preds_color"
+    # # Input 6: Path for prediction result 4
+    # input_folder6 = "/home/ywh/Documents/paper_writing/media/syn_comparison/mic_best/preds_color"
+    # # Output: Path for saving the concatenated images
+    # output_folder = "/home/ywh/Documents/paper_writing/media/syn_comparison/selected_samples"
+    # # Image names to be processed and concatenated
+    # image_names = ["munster_000122_000019", "frankfurt_000001_070099", "munster_000173_000019",
+    #                "lindau_000021_000019", "lindau_000020_000019", "munster_000066_000019",
+    #                "frankfurt_000001_067092", "lindau_000004_000019", "lindau_000007_000019",
+    #                "lindau_000058_000019", "lindau_000022_000019", "lindau_000016_000019",
+    #                "munster_000128_000019", "munster_000117_000019", "lindau_000003_000019",
+    #                "munster_000121_000019", "lindau_000006_000019", "munster_000077_000019",
+    #                "munster_000171_000019", "munster_000090_000019", "munster_000130_000019"]  # Add all image names accordingly
+    # # Suffix for each type of image in the input folders
+    # image_suffix = ["_leftImg8bit.png", "_gtFine_labelTrainIds.png", "_leftImg8bit.png",
+    #                 "_leftImg8bit.png", "_leftImg8bit.png", "_leftImg8bit.png",]  # Add the image suffix accordingly (e.g., ".jpg", ".png", etc.)
+    # # Desired prefix for new image file names
+    # new_file_prefix = ["img", "gt", "da_base", "da_best", "mic_base", "mic_best"]  # Add the desired prefix for new image file names
+    # # Desired dimensions for resizing the images
+    # target_size = (512, 256)  # Set the desired dimensions for resizing the images
+
+    # # Combine the input folders into a list
+    # input_folders = [input_folder1, input_folder2, input_folder3, input_folder4, input_folder5, input_folder6]
+
+    # # Calculate the starting index for numbering the output sample folders
+    # start_idx = len(os.listdir(output_folder)) + 1
+
+    # # Call the main function to process the images and save the concatenated images with the selected file names
+    # copy_and_rename_images(input_folders, output_folder, image_names, image_suffix, new_file_prefix, target_size, start_idx)
+
+
     # Input 1: Original image path
-    input_folder1 = "/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/leftImg8bit/val_all"
+    input_folder1 = "/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/leftImg8bit/train_all"
     # Input 2: Ground truth path
-    input_folder2 = "/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/val_all_color"
-    # Input 3: Path for prediction result 1
-    input_folder3 = "/home/ywh/Documents/paper_writing/media/syn_comparison/da_base/preds_color"
-    # Input 4: Path for prediction result 2
-    input_folder4 = "/home/ywh/Documents/paper_writing/media/syn_comparison/da_best/preds_color"
-    # Input 5: Path for prediction result 3
-    input_folder5 = "/home/ywh/Documents/paper_writing/media/syn_comparison/mic_base/preds_color"
-    # Input 6: Path for prediction result 4
-    input_folder6 = "/home/ywh/Documents/paper_writing/media/syn_comparison/mic_best/preds_color"
+    input_folder2 = "/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_gt_color"
+    # Input 3: SAM masks
+    input_folder3 = "/media/ywh/1/yanweihao/projects/segmentation/segment-anything/tools/outputs/cityscapes_mix2/rgb"
+    # Input 4: UDA prediction
+    input_folder4 = "/media/ywh/1/yanweihao/projects/uda/DAFormer/work_dirs/local-exp7/gta/230522_2312_gta2cs_dacs_a999_fdthings_rcs001_cpl_daformer_sepaspp_mitb5_poly10warm_s0_ea659/pred_trainid_color"
+    # Input 5: DINO prediction
+    input_folder5 = "/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/dino/train_all_color"
+    # Input 6: majority voting
+    input_folder6 = "/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/daformer_gta_sam/sam_majority_color"
+    # Input 7: SGML prediction
+    input_folder7 = "/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/daformer_gta_sam/sam_refine_color"
     # Output: Path for saving the concatenated images
-    output_folder = "/home/ywh/Documents/paper_writing/media/syn_comparison/selected_samples"
+    output_folder = "/home/ywh/Documents/paper_writing/media/get_sam/selected_samples"
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
     # Image names to be processed and concatenated
-    image_names = ["munster_000122_000019", "frankfurt_000001_070099", "munster_000173_000019",
-                   "lindau_000021_000019", "lindau_000020_000019", "munster_000066_000019",
-                   "frankfurt_000001_067092", "lindau_000004_000019", "lindau_000007_000019",
-                   "lindau_000058_000019", "lindau_000022_000019", "lindau_000016_000019",
-                   "munster_000128_000019", "munster_000117_000019", "lindau_000003_000019",
-                   "munster_000121_000019", "lindau_000006_000019", "munster_000077_000019",
-                   "munster_000171_000019", "munster_000090_000019", "munster_000130_000019"]  # Add all image names accordingly
+    image_names = ["aachen_000000_000019", "aachen_000004_000019", "aachen_000009_000019",
+                   "aachen_000021_000019", "aachen_000024_000019", "aachen_000027_000019",
+                   "aachen_000035_000019", "aachen_000064_000019", "aachen_000075_000019",
+                   "aachen_000077_000019", "aachen_000080_000019", "aachen_000086_000019",
+                   "aachen_000100_000019", "aachen_000111_000019", "aachen_000133_000019",
+                   "aachen_000134_000019", "aachen_000139_000019", "aachen_000153_000019",
+                   "bochum_000000_002293"]  # Add all image names accordingly
     # Suffix for each type of image in the input folders
-    image_suffix = ["_leftImg8bit.png", "_gtFine_labelTrainIds.png", "_leftImg8bit.png",
-                    "_leftImg8bit.png", "_leftImg8bit.png", "_leftImg8bit.png",]  # Add the image suffix accordingly (e.g., ".jpg", ".png", etc.)
+    image_suffix = ["_leftImg8bit.png", "_gtFine_color.png", "_leftImg8bit.png",
+                    "_leftImg8bittrainID.png", "_leftImg8bit_labelTrainIds.png", "_leftImg8bit.png", "_leftImg8bit.png"]  # Add the image suffix accordingly (e.g., ".jpg", ".png", etc.)
     # Desired prefix for new image file names
-    new_file_prefix = ["img", "gt", "da_base", "da_best", "mic_base", "mic_best"]  # Add the desired prefix for new image file names
+    new_file_prefix = ["img", "gt", "sam_mask", "uda_pred", "dino", "majority", "sgml"]  # Add the desired prefix for new image file names
     # Desired dimensions for resizing the images
     target_size = (512, 256)  # Set the desired dimensions for resizing the images
 
     # Combine the input folders into a list
-    input_folders = [input_folder1, input_folder2, input_folder3, input_folder4, input_folder5, input_folder6]
+    input_folders = [input_folder1, input_folder2, input_folder3, input_folder4, input_folder5, input_folder6, input_folder7]
 
     # Calculate the starting index for numbering the output sample folders
     start_idx = len(os.listdir(output_folder)) + 1

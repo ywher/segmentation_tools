@@ -55,8 +55,14 @@ def main(source_folder, gt_suffix, save_folder):
 
 
 if __name__ == '__main__':
-    source_folder = '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/daformer_gta_sam/fusion3_trainid'
+    # source_folder = '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/daformer_gta_sam/fusion3_trainid'
+    # source_folder = '/media/ywh/1/yanweihao/projects/uda/DAFormer/work_dirs/local-exp7/gta/230522_2312_gta2cs_dacs_a999_fdthings_rcs001_cpl_daformer_sepaspp_mitb5_poly10warm_s0_ea659/pred_trainid'
+    # source_folder = '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/dino/Gray_outputs_train_all'
+    source_folder = '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/beta_ablation/daformer_gta_beta0.9/fusion3_trainid'
     # gt_suffix = '_labelTrainIds.png'
     gt_suffix = '.png'
-    save_folder = '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/daformer_gta_sam/fusion3_color'
+    # save_folder = '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/daformer_gta_sam/fusion3_color'
+    # save_folder = '/media/ywh/1/yanweihao/projects/uda/DAFormer/work_dirs/local-exp7/gta/230522_2312_gta2cs_dacs_a999_fdthings_rcs001_cpl_daformer_sepaspp_mitb5_poly10warm_s0_ea659/pred_trainid_color'
+    # save_folder = '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/dino/train_all_color'
+    save_folder = '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/beta_ablation/daformer_gta_beta0.9/fusion3_trainid_color'
     main(source_folder, gt_suffix, save_folder)  # 00001_labelTrainIds.png

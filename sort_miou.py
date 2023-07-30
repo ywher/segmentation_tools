@@ -103,6 +103,7 @@ def main2(gt_folder, pred1_folder, pred2_folder):
         # miou_pred3 = calculate_miou(gt_path, pred3_path)
         # miou_pred4 = calculate_miou(gt_path, pred4_path)
         delta_miou = miou_pred2 - miou_pred1
+        print('delta_miou', delta_miou)
         # delta_miou2 = miou_pred4 - miou_pred3
 
         results.append([file_name, miou_pred1, miou_pred2, delta_miou])
@@ -118,7 +119,7 @@ def main2(gt_folder, pred1_folder, pred2_folder):
     # df["MIoU Prediction 3"] = df["MIoU Prediction 3"].round(2)
     # df["MIoU Prediction 4"] = df["MIoU Prediction 4"].round(2)
     # df["Delta MIoU2"] = df["Delta MIoU2"].round(2)
-    df.to_csv("miou_results.csv", index=False)
+    df.to_csv("miou_results_new.csv", index=False)
 
 if __name__ == "__main__":
     # 输入1：语义分割真值的路径
@@ -134,6 +135,6 @@ if __name__ == "__main__":
     # main(gt_folder, pred1_folder, pred2_folder, pred3_folder, pred4_folder)
 
     gt_folder = "/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all"
-    pred_majority = "/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/daformer_gta_sam/fusion3_majority_trainid"
-    pred_sam = "/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/daformer_gta_sam/fusion3_trainid"
-    main2(gt_folder, pred_majority, pred_sam)
+    pred_da_base = "/media/ywh/1/yanweihao/projects/uda/DAFormer/work_dirs/local-exp7/gta/230522_2312_gta2cs_dacs_a999_fdthings_rcs001_cpl_daformer_sepaspp_mitb5_poly10warm_s0_ea659/pred_trainid"
+    pred_fusion3 = "/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/beta_ablation/daformer_gta_beta0.9/fusion3_trainid"
+    main2(gt_folder, pred_da_base, pred_fusion3)

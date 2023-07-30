@@ -1,20 +1,20 @@
-Mean	69.13
-road	89.25
-sidewalk	64.13
-building	88.37
-wall	59.46
-fence	43.06
-pole	57.8
-traffic light	48.18
-traffic sign	68.12
-vegetation	76.1
-terrain	61.17
-sky	85.71
-person	70.53
-rider	46.07
-car	89.62
-truck	76.48
-bus	82.43
-train	88.97
-motorcycle	55.52
-bicycle	62.56
+Mean	67.75
+road	88.82
+sidewalk	60.61
+building	87.16
+wall	56.69
+fence	38.8
+pole	53.66
+traffic light	62.04
+traffic sign	61.5
+vegetation	74.41
+terrain	59.52
+sky	86.22
+person	67.69
+rider	49.18
+car	88.37
+truck	74.81
+bus	75.31
+train	86.48
+motorcycle	54.71
+bicycle	61.27

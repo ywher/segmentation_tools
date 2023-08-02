@@ -1,3 +1,14 @@
+'''
+input:
+    source_path: source image path
+    color_path: color image path
+    color_list: color list
+    output_path: output image path
+function:
+    paste color from color image to source image
+output:
+    output image
+'''
 from PIL import Image
 import cv2
 def paste_color_from_image(source_path, color_path, color_list, output_path):
@@ -53,10 +64,11 @@ def paste_color_from_image(source_path, color_path, color_list, output_path):
 
 # Example usage
 if __name__ == "__main__":
-    input_image_path = "ps.png"
-    color_image_path = "pt.png"
-    selected_colors = ["0,0,142", "250,170,30", "220,220,0"]  # Replace with your desired RGB color list
-    output_image_path = "mix.png"
+    input_image_path = "images/fusion3.png"
+    color_image_path = "images/uda.png"
+    # selected_colors = ["0,0,142", "250,170,30", "220,220,0"]  # Replace with your desired RGB color list
+    selected_colors = ["220,20,60"]
+    output_image_path = "images/new_fusion3.png"
 
     paste_color_from_image(input_image_path, color_image_path,
                            selected_colors, output_image_path)

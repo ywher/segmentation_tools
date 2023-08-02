@@ -15,10 +15,10 @@ def blend_images(img_path1, img_path2, alpha, output_path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Blend two images based on a blending coefficient.")
-    parser.add_argument("--image1_path", type=str, default="/home/ywh/Documents/paper_writing/media/get_sam/selected_samples/sample_17/img.png")
-    parser.add_argument("--image2_path", type=str, default="/home/ywh/Documents/paper_writing/media/get_sam/selected_samples/sample_17/gt.png")
+    parser.add_argument("--image1_path", type=str, default="/home/ywh/Documents/paper_writing/media/first_img/selected_samples/sample_3/fusion3.png")
+    parser.add_argument("--image2_path", type=str, default="/home/ywh/Documents/paper_writing/media/first_img/selected_samples/sample_3/img.png")
     parser.add_argument("--blending_coefficient", type=float, default=0.5, help="Blending coefficient (between 0 and 1)")
-    parser.add_argument("--output_path", type=str, default="/home/ywh/Documents/paper_writing/media/get_sam/selected_samples/sample_17/mix.png")
+    parser.add_argument("--output_path", type=str, default="/home/ywh/Documents/paper_writing/media/first_img/selected_samples/sample_3/fusion3_mix.png")
     args = parser.parse_args()
 
     # Check if the blending coefficient is within the valid range [0, 1]

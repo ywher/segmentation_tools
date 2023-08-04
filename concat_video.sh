@@ -21,11 +21,29 @@
 #     --output "${video_root2}concat${target_scene}"
 # done
 
-video_root1='/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/leftImg8bit_demoVideo/leftImg8bit/demoVideo/'
-video_root2='/home/ywh/Documents/paper_writing/media/video_demo/city_v1/'
-python concat_video.py \
---inputs "${video_root1}stuttgart_01.mp4" "${video_root2}tufl_source.mp4" "${video_root2}tufl_base.mp4" "${video_root2}tufl_best.mp4" "${video_root2}tufl_best_ms.mp4" \
---interval 10 \
---output "${video_root2}concat.mp4" \
---resize 512 256 \
---columns 2
+### tufl for city video
+# for scene in 'stuttgart_00' 'stuttgart_01' 'stuttgart_02'
+# do
+#     video_root1="/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/leftImg8bit_demoVideo/leftImg8bit/demoVideo/"
+#     video_root2="/home/ywh/Documents/paper_writing/media/video_demo/${scene}/"
+#     python concat_video.py \
+#     --inputs "${video_root1}${scene}.mp4" "${video_root2}tufl_source.mp4" "${video_root2}tufl_base2.mp4" "${video_root2}tufl_base.mp4" "${video_root2}tufl_best.mp4" "${video_root2}tufl_best_ms.mp4" \
+#     --interval 10 \
+#     --output "${video_root2}concat.mp4" \
+#     --resize 512 256 \
+#     --columns 2
+# done
+
+### daformer for city video
+method="daformer"
+video_root1="/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/leftImg8bit_demoVideo/leftImg8bit/demoVideo"
+for scene in "stuttgart_00" "stuttgart_01" "stuttgart_02"
+do
+    video_root2="/home/ywh/Documents/paper_writing/media/video_demo/${scene}/${method}"
+    python concat_video.py \
+    --inputs "${video_root1}/${scene}.mp4" "${video_root2}/da_source_color.mp4" "${video_root2}/da_base_color.mp4" "${video_root2}/da_best_color.mp4" \
+    --interval 10 \
+    --output "${video_root2}/concat.mp4" \
+    --resize 512 256 \
+    --columns 2
+done

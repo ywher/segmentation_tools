@@ -18,6 +18,7 @@
 '''
 import os
 import shutil
+import tqdm
 from PIL import Image
 
 # Function to get the size of an image
@@ -43,6 +44,7 @@ def copy_and_rename_images(input_folders, output_folder, image_names, image_suff
     start_idx: 保存拼接图像时的起始索引, 用于给每个图像样本创建一个独立的文件夹。
     '''
     # Loop through the selected image names and perform the following operations for each image
+    bar = tqdm.tqdm(total=len(image_names))
     for idx, image_name in enumerate(image_names, start=start_idx):
         # Create a new sample folder in the output folder for each image
         sample_folder = os.path.join(output_folder, f"sample_{idx}")
@@ -75,6 +77,8 @@ def copy_and_rename_images(input_folders, output_folder, image_names, image_suff
         # Save the merged image with the specified naming convention
         merged_image_path = os.path.join(output_folder, f"sample_{idx}", f"{image_name}.png")
         merged_image.save(merged_image_path)
+        bar.update(1)
+    bar.close()
 
 # The main entry point of the script
 if __name__ == "__main__":
@@ -132,6 +136,8 @@ if __name__ == "__main__":
     input_folder6 = "/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/daformer_gta_sam/sam_majority_color"
     # Input 7: SGML prediction
     input_folder7 = "/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/daformer_gta_sam/sam_refine_color"
+    # Input 8: fusion 3 color on SGML
+    input_folder8 = "/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/daformer_gta_sam/fusion3_color"
     # Output: Path for saving the concatenated images
     output_folder = "/home/ywh/Documents/paper_writing/media/get_sam/selected_samples"
     if not os.path.exists(output_folder):
@@ -145,22 +151,25 @@ if __name__ == "__main__":
                    "aachen_000134_000019", "aachen_000139_000019", "aachen_000153_000019",
                    "bochum_000000_002293"]  # Add all image names accordingly
     # Suffix for each type of image in the input folders
-    image_suffix = ["_leftImg8bit.png", "_gtFine_labelTrainIds.png", "_leftImg8bit.png",
-                    "_leftImg8bittrainID.png", "_leftImg8bit_labelTrainIds.png", "_leftImg8bit.png", "_leftImg8bit.png"]  # Add the image suffix accordingly (e.g., ".jpg", ".png", etc.)
+    image_suffix = ["_leftImg8bit.png", "_gtFine_labelTrainIds.png", "_leftImg8bit.png", "_leftImg8bittrainID.png",
+                    "_leftImg8bit_labelTrainIds.png", "_leftImg8bit.png", "_leftImg8bit.png", "_leftImg8bit.png"]  # Add the image suffix accordingly (e.g., ".jpg", ".png", etc.)
     # Desired prefix for new image file names
-    new_file_prefix = ["img", "gt", "sam_mask", "uda_pred", "dino", "majority", "sgml"]  # Add the desired prefix for new image file names
+    new_file_prefix = ["img", "gt", "sam_mask", "uda_pred", "dino", "majority", "sgml", "fusion3"]  # Add the desired prefix for new image file names
     # Desired dimensions for resizing the images
     target_size = (512, 256)  # Set the desired dimensions for resizing the images
 
     # Combine the input folders into a list
-    input_folders = [input_folder1, input_folder2, input_folder3, input_folder4, input_folder5, input_folder6, input_folder7]
+    input_folders = [input_folder1, input_folder2, input_folder3, input_folder4, 
+                     input_folder5, input_folder6, input_folder7, input_folder8]
 
     # Calculate the starting index for numbering the output sample folders
     start_idx = len(os.listdir(output_folder)) + 1
 
     # Call the main function to process the images and save the concatenated images with the selected file names
-    copy_and_rename_images(input_folders, output_folder, image_names, image_suffix, new_file_prefix, target_size, start_idx)
+    copy_and_rename_images(input_folders, output_folder, image_names, image_suffix, 
+                           new_file_prefix, target_size, start_idx)
     
+    # select for paper first image
     # # Input 1: Original image path
     # input_folder1 = "/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/leftImg8bit/train_all"
     # # Input 2: Ground truth path

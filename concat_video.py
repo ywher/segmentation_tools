@@ -98,5 +98,7 @@ if __name__ == '__main__':
     parser.add_argument('--resize', type=int, nargs=2, default=[512, 256], help='resize dimensions (width height)')
     parser.add_argument('--columns', type=int, default=2, help='number of columns for displaying videos')
     args = parser.parse_args()
+    
+    print('Inputs: ', args.inputs)
 
     main(args)

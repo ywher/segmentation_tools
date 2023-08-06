@@ -6,9 +6,11 @@ def blend_images(img_path1, img_path2, alpha, output_path):
     img2 = cv2.imread(img_path2)
 
     if img1.shape != img2.shape:
-        raise ValueError("Input images must have the same dimensions.")
+        print("Input images must have the same dimensions.")
+        img1 = cv2.resize(img1, (img2.shape[1], img2.shape[0]))
+        print("change img1 shape to img2 shape")
 
-    blended_img = cv2.addWeighted(img1, alpha, img2, 1 - alpha, 0)
+    blended_img = cv2.addWeighted(img1, 1 - alpha, img2, alpha, 0)
 
     cv2.imwrite(output_path, blended_img)
     print(f"Blended image saved to {output_path}")

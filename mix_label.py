@@ -64,11 +64,12 @@ def paste_color_from_image(source_path, color_path, color_list, output_path):
 
 # Example usage
 if __name__ == "__main__":
-    input_image_path = "images/fusion3.png"
-    color_image_path = "images/uda.png"
+    input_image_path = "images/fusion1.png"
+    color_image_path = "images/01990_gta_gt.png"
     # selected_colors = ["0,0,142", "250,170,30", "220,220,0"]  # Replace with your desired RGB color list
-    selected_colors = ["220,20,60"]
-    output_image_path = "images/new_fusion3.png"
+    # selected_colors = ["220,20,60"]
+    selected_colors = ["250,170,30", "153,153,153", "0,0,230", "255,0,0"]
+    output_image_path = "images/new_fusion1.png"
 
     paste_color_from_image(input_image_path, color_image_path,
                            selected_colors, output_image_path)

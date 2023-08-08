@@ -15,6 +15,8 @@ def main():
     parser.add_argument("--folder_path", type=str, help="文件夹路径")
     parser.add_argument("--num_subfolders", type=int, default=0, help="要统计的子文件夹数量")
     parser.add_argument("--subtract_one", action="store_true", help="是否在统计子文件夹的文件数量时减去1")
+    parser.add_argument("--bins", type=int, default=10, help="直方图的柱子数量")
+    parser.add_argument("--output_path", type=str, default="histogram.pdf", help="直方图的输出路径")
 
     args = parser.parse_args()
 
@@ -28,11 +30,11 @@ def main():
 
     # 绘制直方图
     plt.figure(figsize=(6, 2))
-    plt.hist(file_counts, bins=10, alpha=0.7, color='blue')
+    plt.hist(file_counts, bins=args.bins, alpha=0.7, color='blue')
     plt.xlabel('Number of masks')
     plt.ylabel('Number of images')
     # plt.title('Distribution of number of masks per image')
-    plt.savefig("histogram.pdf", bbox_inches='tight')
+    plt.savefig(args.output_path, bbox_inches='tight')
     plt.show()
 
     print("平均文件数量:", average_file_count)

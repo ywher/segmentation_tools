@@ -2,6 +2,7 @@ miou_cal.sh
 show_result.sh
 data.csv
 acdc.csv
+*.pdf
 
 #folder
 miou_dataset/

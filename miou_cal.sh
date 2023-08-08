@@ -39,14 +39,14 @@
 #     --save_path 'miou_dataset/daformer_gta_f'$i'_result_beta0.99.txt'
 # done
 
-for i in 1 2 3
-do
-    python miou_cal.py \
-    --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
-    --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/daformer_gta_sam/fusion'$i'_majority_trainid' \
-    --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
-    --save_path 'miou_dataset/daformer_gta_f'$i'_result_majority.txt'
-done
+# for i in 1 2 3
+# do
+#     python miou_cal.py \
+#     --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
+#     --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/daformer_gta_sam/fusion'$i'_majority_trainid' \
+#     --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
+#     --save_path 'miou_dataset/daformer_gta_f'$i'_result_majority.txt'
+# done
 
 # python miou_cal.py \
 # --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all' \
@@ -108,22 +108,22 @@ done
 # do
 #     python miou_cal.py \
 #     --gt_dir '/media/ywh/1/yanweihao/projects/uda/DAFormer/data/acdc/gt/train' \
-#     --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/debug_acdc/fusion'$i'_trainid' \
+#     --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/ACDC/tufl_acdc/fusion'$i'_trainid' \
 #     --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
-#     --save_path 'miou_dataset/daformer_acdc_f'$i'_result.txt'
+#     --save_path 'miou_dataset/tufl_acdc_f'$i'_result.txt'
 # done
+
+python miou_cal.py \
+--gt_dir '/media/ywh/1/yanweihao/projects/uda/DAFormer/data/acdc/gt/train' \
+--pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/ACDC/tufl_acdc/selected_trainid' \
+--devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
+--save_path 'miou_dataset/tufl_acdc_selected.txt'
 
 # python miou_cal.py \
 # --gt_dir '/media/ywh/1/yanweihao/projects/uda/DAFormer/data/acdc/gt/train' \
-# --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/mic/mic_acdc/select_trainid' \
+# --pred_dir '/media/ywh/1/yanweihao/projects/uda/BiSeNet-uda/outputs/acdc/CityScapes_ACDC_BiSeNet_20kunsup_focal_0.8_0.05_paste_mode_Single_1/pred_train/pred_trainid' \
 # --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
-# --save_path 'miou_dataset/daformer_acdc_selected.txt'
-
-# python miou_cal.py \
-# --gt_dir '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_darmstadt' \
-# --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/train_fusion_darmstadt_1/trainID_bg' \
-# --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
-# --save_path './daformer_gtaf1_darmstadt1_result.txt'
+# --save_path './tufl_acdc_base_result.txt'
 
 #acdc
 # python miou_cal.py \

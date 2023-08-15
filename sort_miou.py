@@ -134,7 +134,7 @@ if __name__ == "__main__":
     # pred4_folder = "/home/ywh/Documents/paper_writing/media/syn_comparison/mic_best/preds_trainid"
     # main(gt_folder, pred1_folder, pred2_folder, pred3_folder, pred4_folder)
 
-    gt_folder = "/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all"
-    pred_da_base = "/media/ywh/1/yanweihao/projects/uda/DAFormer/work_dirs/local-exp7/gta/230522_2312_gta2cs_dacs_a999_fdthings_rcs001_cpl_daformer_sepaspp_mitb5_poly10warm_s0_ea659/pred_trainid"
-    pred_fusion3 = "/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/beta_ablation/daformer_gta_beta0.9/fusion3_trainid"
+    gt_folder = "/media/cyber-fx/ywh_disk/datasets/cityscapes/gtFine/train_all"
+    pred_da_base = "/media/cyber-fx/ywh_disk/projects/SePiCo/work_dirs/local-exp1/acdc/230723_1056_dlv2_proj_r101v1c_sepico_DistCL-reg-w1.0-start-iter3000-tau100.0-l3-w1.0_rcs0.01_cpl_self_adamw_6e-05_pmT_poly10warm_1x2_40k_cs2acdc_seed76_fef76/pred_trainid"
+    pred_fusion3 = "/media/cyber-fx/ywh_disk/projects/SAM4UDASS/outputs/sepico_acdc/fusion1_trainid"
     main2(gt_folder, pred_da_base, pred_fusion3)

@@ -21,7 +21,7 @@ def get_iou_data(file_name):
             number = content[begin+2:end]
         data_list.append(number)
             
-    file_name = 'outputs/iou_data.csv'
+    file_name = file_name.replace('.txt', '.csv')
     data_dict = {}
 
     if (eval(data_list[10]) == 0 and eval(data_list[15]) == 0 and eval(data_list[17]) == 0):

@@ -4,6 +4,8 @@ import json
 from PIL import Image
 from os.path import join
 import os
+import time
+import datetime
 from get_iou import get_iou_data
 
 #设标签宽W，长H，计算一张图片的hist矩阵
@@ -89,8 +91,9 @@ def compute_mIoU(gt_dir, pred_dir, num_classes, save_path, devkit_dir=''):#计�
     # gt_imgs = open(label_path_list, 'r').read().splitlines()#获得验证集标签名称列表s
     # pred_imgs = open(image_path_list, 'r').read().splitlines()#获得验证集图像分割结果名称列表
     
-
-    for ind in range(len(gt_imgs)):#读取每一个（图片-标签）对
+    start_time = time.time()
+    total_iterations = len(gt_imgs)
+    for ind in range(total_iterations):#读取每一个（图片-标签）对
         pred = np.array(Image.open(pred_imgs[ind]))#读取一张图像分割结果，转化成numpy数组
         label = np.array(Image.open(gt_imgs[ind]))#读取一张对应的标签，转化成numpy数组
         # label = label_mapping(label, mapping)#进行标签映射（因为没有用到全部类别，因此舍弃某些类别），可忽略
@@ -100,7 +103,9 @@ def compute_mIoU(gt_dir, pred_dir, num_classes, save_path, devkit_dir=''):#计�
         hist += fast_hist(label.flatten(), pred.flatten(), num_classes)#对一张图片计算19×19的hist矩阵，并累加
         # hist += fast_hist(label, pred, num_classes)
         if ind > 0 and ind % 100 == 0:#每计算100张就输出一下目前已计算的图片中所有类别平均的mIoU值
-            print('{:d} / {:d}: {:0.2f}'.format(ind, len(gt_imgs), 100*np.mean(per_class_iu(hist))))
+            eta = int((time.time() - start_time) / (ind + 1) * (total_iterations - ind - 1))
+            eta_str = str(datetime.timedelta(seconds=eta))
+            print('{:d} / {:d}, mIoU: {:0.2f}, eta: {}'.format(ind, len(gt_imgs), 100*np.mean(per_class_iu(hist)), eta_str))
     
     mIoUs = per_class_iu(hist)#计算所有验证集图片的逐类别mIoU值
     # print('mIoU', mIoUs)
@@ -126,6 +131,10 @@ def compute_mIoU(gt_dir, pred_dir, num_classes, save_path, devkit_dir=''):#计�
     print('')
     print('===> PA: ' + str(round(PA * 100, 2)))
     
+    # check save_path exists
+    if not os.path.exists(os.path.dirname(save_path)):
+        os.makedirs(os.path.dirname(save_path))
+        
     ##保存mIoU值，CPA值，PA值
     with open(save_path, 'w') as f:
         f.write('===> mIoU: ' + str(round(np.mean(mIoUs) * 100, 2)) + '\n')

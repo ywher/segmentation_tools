@@ -1,15 +1,18 @@
 import pandas as pd
+import numpy as np
 
-
-def get_iou_data(file_name):
+def get_iou_data(file_name, synthia):
 
     data_list = []
     begin = end = 0
 
     with open(file_name, 'r') as f:
         contents = f.readlines()
-        
-    num_of_data = 20
+    
+    if synthia:
+        num_of_data = 17
+    else:
+        num_of_data = 20
 
     for i in range(num_of_data):
         content = contents[i]
@@ -26,6 +29,7 @@ def get_iou_data(file_name):
 
     if (eval(data_list[10]) == 0 and eval(data_list[15]) == 0 and eval(data_list[17]) == 0):
         data_list = data_list[:10] + data_list[11:15] + data_list[16:17] + data_list[18:]
+        data_list[0] = np.mean(np.array(data_list[1:], dtype=np.float32))
 
     for i in range(len(data_list)):
         if eval(data_list[i]) < 1:

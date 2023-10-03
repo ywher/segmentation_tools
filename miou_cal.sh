@@ -4,15 +4,34 @@ dev_dir="/media/ywh/1/yanweihao/projects/segmentation/segmentation_tools/utils"
 output_root="/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs"
 
 ### daformer gta
-pred_folder="cityscapes/daformer/daformer_gta_vith_default"
-output_folder="miou_dataset/daformer/gta/vith_default"
-for i in 1 2 3
-do
-    python miou_cal.py \
-    --gt_dir ${city_gt} \
-    --pred_dir "${output_root}/${pred_folder}/fusion${i}_trainid" \
-    --devkit_dir "${dev_dir}" \
-    --save_path "${output_folder}/daformer_gta_f${i}.txt"
+# for folder in "train_vitb_default" "train_vitl_default"
+# do
+#     pred_folder="cityscapes/daformer/${folder}"
+#     output_folder="miou_dataset/daformer/gta/${folder}"
+#     for i in 1 2 3
+#     do
+#         python miou_cal.py \
+#         --gt_dir ${city_gt} \
+#         --pred_dir "${output_root}/${pred_folder}/fusion${i}_trainid" \
+#         --devkit_dir "${dev_dir}" \
+#         --save_path "${output_folder}/daformer_gta_f${i}.txt"
+#     done
+# done
+
+### daformer syn
+for folder in "da_syn_vith_32_86_92_mode_0" # "da_syn_vith_32_86_92_mode_2" # "da_syn_vith_32_86_92_mode_2"
+do 
+    pred_folder="cityscapes/daformer/${folder}"
+    output_folder="miou_dataset/daformer/syn/${folder}"
+    for i in 1 2 3
+    do
+        python miou_cal.py \
+        --gt_dir ${city_gt} \
+        --pred_dir "${output_root}/${pred_folder}/fusion${i}_trainid" \
+        --devkit_dir "${dev_dir}" \
+        --save_path "${output_folder}/daformer_syn_f${i}.txt" \
+        --synthia
+    done
 done
 
 ### daformer gta UDA pseudo

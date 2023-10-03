@@ -61,7 +61,7 @@ compute_mIoU函数是以CityScapes图像分割验证集为例来计算mIoU值的
 大家在使用的时候，可以忽略原作者的数据读取过程，只需要注意计算mIoU的时候每张图片分割结果与标签要配对。
 主要留意mIoU指标的计算核心代码即可。
 '''
-def compute_mIoU(gt_dir, pred_dir, num_classes, save_path, devkit_dir=''):#计算mIoU的函数
+def compute_mIoU(gt_dir, pred_dir, num_classes, synthia, save_path, devkit_dir=''):#计算mIoU的函数
     """
     Compute IoU given the predicted colorized images and 
     """
@@ -105,7 +105,13 @@ def compute_mIoU(gt_dir, pred_dir, num_classes, save_path, devkit_dir=''):#计�
         if ind > 0 and ind % 100 == 0:#每计算100张就输出一下目前已计算的图片中所有类别平均的mIoU值
             eta = int((time.time() - start_time) / (ind + 1) * (total_iterations - ind - 1))
             eta_str = str(datetime.timedelta(seconds=eta))
-            print('{:d} / {:d}, mIoU: {:0.2f}, eta: {}'.format(ind, len(gt_imgs), 100*np.mean(per_class_iu(hist)), eta_str))
+            ious = per_class_iu(hist) #计算所有验证集图片的逐类别mIoU值
+            if synthia:
+                # 0-8, 10-13, 15, 17, 18
+                miou = np.sum(ious[[0,1,2,3,4,5,6,7,8,10,11,12,13,15,17,18]]) / 16 * 100
+            else:
+                miou = np.mean(ious) * 100
+            print('{:d} / {:d}, mIoU: {:0.2f}, eta: {}'.format(ind, len(gt_imgs), miou, eta_str))
     
     mIoUs = per_class_iu(hist)#计算所有验证集图片的逐类别mIoU值
     # print('mIoU', mIoUs)
@@ -113,6 +119,14 @@ def compute_mIoU(gt_dir, pred_dir, num_classes, save_path, devkit_dir=''):#计�
     CPrecisions=classPrecision(hist)
     PA=pixelAccuracy(hist)
     
+    
+    if synthia:
+        classes_index = [0,1,2,3,4,5,6,7,8,10,11,12,13,15,17,18]
+        mIoUs = mIoUs[classes_index]
+        CRecalls = CRecalls[classes_index]
+        CPrecisions = CPrecisions[classes_index]
+        num_classes = 16
+        name_classes = name_classes[:9] + name_classes[10:14] + name_classes[15:16] + name_classes[17:19]
     #按照类别一次输出一下mIoU值和mRecall值
     for ind_class in range(num_classes):#逐类别输出一下IoU值
         cls_name = name_classes[ind_class] if len(name_classes[ind_class]) <= 4 else name_classes[ind_class][:4]
@@ -164,8 +178,8 @@ def compute_mIoU(gt_dir, pred_dir, num_classes, save_path, devkit_dir=''):#计�
 
 
 def main(args):
-    compute_mIoU(args.gt_dir, args.pred_dir, args.num_classes, args.save_path, args.devkit_dir)  # 执行计算mIoU的函数
-    get_iou_data(args.save_path)  # 将保存的结果输出到csv文件中
+    compute_mIoU(args.gt_dir, args.pred_dir, args.num_classes, args.synthia, args.save_path, args.devkit_dir)  # 执行计算mIoU的函数
+    get_iou_data(args.save_path, args.synthia)  # 将保存的结果输出到csv文件中
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -177,5 +191,6 @@ if __name__ == "__main__":
                         default='/media/yons/pool1/ywh/projects/Segmentation/tools/utils')#设置devikit_dir文件夹，里面有记录图片与标签名称及其他信息的txt文件
     parser.add_argument('--num_classes', type=int, default=19, help='number of classes')
     parser.add_argument('--save_path', type=str, default='./eval_result.txt', help='path to save result txt file')
+    parser.add_argument('--synthia', action='store_true', help='whether to evaluate on synthia')
     args = parser.parse_args()
     main(args)#执行主函数

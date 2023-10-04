@@ -1,9 +1,10 @@
 ### cityscapes
 city_gt="/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all"
+acdc_gt="/media/ywh/1/yanweihao/dataset/acdc/gt/train"
 dev_dir="/media/ywh/1/yanweihao/projects/segmentation/segmentation_tools/utils"
 output_root="/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs"
 
-### daformer gta
+### daformer gta->cityscapes
 # for folder in "train_vitb_default" "train_vitl_default"
 # do
 #     pred_folder="cityscapes/daformer/${folder}"
@@ -18,21 +19,21 @@ output_root="/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outpu
 #     done
 # done
 
-### daformer syn
-for folder in "da_syn_vith_32_86_92_mode_0" # "da_syn_vith_32_86_92_mode_2" # "da_syn_vith_32_86_92_mode_2"
-do 
-    pred_folder="cityscapes/daformer/${folder}"
-    output_folder="miou_dataset/daformer/syn/${folder}"
-    for i in 1 2 3
-    do
-        python miou_cal.py \
-        --gt_dir ${city_gt} \
-        --pred_dir "${output_root}/${pred_folder}/fusion${i}_trainid" \
-        --devkit_dir "${dev_dir}" \
-        --save_path "${output_folder}/daformer_syn_f${i}.txt" \
-        --synthia
-    done
-done
+### daformer syn->cityscapes
+# for folder in "da_syn_vith_32_86_92_mode_0" # "da_syn_vith_32_86_92_mode_2" # "da_syn_vith_32_86_92_mode_2"
+# do 
+#     pred_folder="cityscapes/daformer/${folder}"
+#     output_folder="miou_dataset/daformer/syn/${folder}"
+#     for i in 1 2 3
+#     do
+#         python miou_cal.py \
+#         --gt_dir ${city_gt} \
+#         --pred_dir "${output_root}/${pred_folder}/fusion${i}_trainid" \
+#         --devkit_dir "${dev_dir}" \
+#         --save_path "${output_folder}/daformer_syn_f${i}.txt" \
+#         --synthia
+#     done
+# done
 
 ### daformer gta UDA pseudo
 # pred_path="/media/ywh/1/yanweihao/projects/uda/DAFormer/work_dirs/local-exp7/gta/230522_2312_gta2cs_dacs_a999_fdthings_rcs001_cpl_daformer_sepaspp_mitb5_poly10warm_s0_ea659/pred_trainid"
@@ -174,14 +175,20 @@ done
 # done
 
 # acdc
-# for i in 1 2 3 4 5
-# do
-#     python miou_cal.py \
-#     --gt_dir '/media/ywh/1/yanweihao/projects/uda/DAFormer/data/acdc/gt/train' \
-#     --pred_dir '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/ACDC/tufl_acdc/fusion'$i'_trainid' \
-#     --devkit_dir '/media/ywh/1/yanweihao/projects/segmentation/tools/utils' \
-#     --save_path 'miou_dataset/tufl_acdc_f'$i'_result.txt'
-# done
+model="daformer"
+for folder in "vith_32_86_92_mode_0" "vith_32_86_92_mode_1" "vith_32_86_92_mode_2"
+do
+    pred_folder="ACDC/${model}/${folder}"
+    output_folder="miou_dataset/${model}/acdc/${folder}"
+    for i in 1 2 3
+    do
+        python miou_cal.py \
+        --gt_dir ${acdc_gt} \
+        --pred_dir "${output_root}/${pred_folder}/fusion${i}_trainid" \
+        --devkit_dir "${dev_dir}" \
+        --save_path "${output_folder}/${model}_acdc_f${i}.txt"
+    done
+done
 
 # python miou_cal.py \
 # --gt_dir '/media/ywh/1/yanweihao/projects/uda/DAFormer/data/acdc/gt/train' \

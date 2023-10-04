@@ -1,5 +1,6 @@
 import os
 import argparse
+import cv2
 from tqdm import tqdm
 
 def change_image_suffix(folder_path, original_suffix, new_suffix):
@@ -8,7 +9,12 @@ def change_image_suffix(folder_path, original_suffix, new_suffix):
         original_file_path = os.path.join(folder_path, filename)
         new_filename = filename.replace(original_suffix, new_suffix)
         new_file_path = os.path.join(folder_path, new_filename)
-        os.rename(original_file_path, new_file_path)
+        ori_suf = original_file_path.split(".")[-1]
+        new_suf = new_file_path.split(".")[-1]
+        if ori_suf == new_suf:
+            os.rename(original_file_path, new_file_path)
+        else:
+            cv2.imwrite(new_file_path, cv2.imread(original_file_path))
 
 def main():
     parser = argparse.ArgumentParser(description="Change image file extensions in a folder.")

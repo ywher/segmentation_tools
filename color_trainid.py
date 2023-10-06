@@ -52,7 +52,7 @@ def main(source_folder, gt_suffix, save_folder):
         color_segmentation_ = color_segmentation(segmentation)
         cv2.imwrite(os.path.join(save_folder, file.replace(gt_suffix, '.png')), color_segmentation_)
         bar.update(1)
-    print('Done')
+    # print('Done')
 
 
 def get_args():

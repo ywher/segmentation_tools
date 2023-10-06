@@ -1,6 +1,7 @@
 ### cityscapes
 city_gt="/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all"
 acdc_gt="/media/ywh/1/yanweihao/dataset/acdc/gt/train"
+pass_gt="/media/ywh/1/yanweihao/dataset/DensePASS/leftImg8bit/val"
 dev_dir="/media/ywh/1/yanweihao/projects/segmentation/segmentation_tools/utils"
 output_root="/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs"
 

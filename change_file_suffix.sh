@@ -5,12 +5,20 @@
 # --original_suffix "_trainID.png" \
 # --new_suffix ".png" \
 
-data_root="/media/ywh/1/yanweihao/dataset/DensePASS/leftImg8bit/train"
-for folder in 'Canberra' 'Melbourne' 'Nottingham' 'Amsterdam' 'Manila' 'Capetown' 'Edinburgh' 'Jakarta' 'Zagreb' 'Auckland' 'Bangkok' 'Osaka' 'Saopaulo' 'Florence' 'Yokohama' 'Chicago' 'Glasgow' 'Helsinki' 'Turin' 'Singapore' 'Toronto' 'Oslo' 'Seoul' 'Barcelona' 'Lisbon' 'Sandiego' 'Buenosaires' 'Dublin' 'Moscow' 'Athens' 'Copenhagen' 'Montreal' 'Istanbul' 'Mexicocity' 'Stockholm' 'Marseille' 'Brussel' 'Bremen' 'Zurich' 'Hochiminhcity'
-do
-    python change_file_suffix.py \
-    echo "Processing ${folder}..." \
-    --folder_path "${data_root}/${folder}" \
-    --original_suffix ".jpg" \
-    --new_suffix ".png"
-done
+# densepass train
+# data_root="/media/ywh/1/yanweihao/dataset/DensePASS/leftImg8bit/train"
+# for folder in 'Canberra' 'Melbourne' 'Nottingham' 'Amsterdam' 'Manila' 'Capetown' 'Edinburgh' 'Jakarta' 'Zagreb' 'Auckland' 'Bangkok' 'Osaka' 'Saopaulo' 'Florence' 'Yokohama' 'Chicago' 'Glasgow' 'Helsinki' 'Turin' 'Singapore' 'Toronto' 'Oslo' 'Seoul' 'Barcelona' 'Lisbon' 'Sandiego' 'Buenosaires' 'Dublin' 'Moscow' 'Athens' 'Copenhagen' 'Montreal' 'Istanbul' 'Mexicocity' 'Stockholm' 'Marseille' 'Brussel' 'Bremen' 'Zurich' 'Hochiminhcity'
+# do
+#     python change_file_suffix.py \
+#     echo "Processing ${folder}..." \
+#     --folder_path "${data_root}/${folder}" \
+#     --original_suffix ".jpg" \
+#     --new_suffix ".png"
+# done
+
+# densepass val
+data_root="/media/ywh/1/yanweihao/dataset/DensePASS/leftImg8bit/val"
+python change_file_suffix.py \
+--folder_path "${data_root}" \
+--original_suffix "_.png" \
+--new_suffix ".png"

@@ -17,7 +17,7 @@
 # done
 
 # densepass val
-data_root="/media/ywh/1/yanweihao/dataset/DensePASS/leftImg8bit/val"
+data_root="/media/ywh/1/yanweihao/projects/segmentation/segment-anything/tools/outputs/DensePASS_val_vith/gray"
 python change_file_suffix.py \
 --folder_path "${data_root}" \
 --original_suffix "_.png" \

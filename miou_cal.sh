@@ -93,29 +93,39 @@ output_root="/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outpu
 
 # gta
 # dafromer
-# for alpha in 0.005 0.008 0.01
+# for alpha in 0.01 0.01_mode3 0.05 0.05_mode3 0.1 0.15 0.2 0.25 0.3 0.35 0.4
 # do
 #     for i in 1 2 3
 #     do
 #         python miou_cal.py \
 #         --gt_dir "${city_gt}" \
-#         --pred_dir "/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/area_ratio_ablation/da_gta_vith_32_86_92_${alpha}/fusion${i}_trainid" \
+#         --pred_dir "/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/alpha_ablation/daformer_gta_alpha${alpha}/fusion${i}_trainid" \
 #         --devkit_dir "${dev_dir}" \
-#         --save_path "miou_dataset/daformer/gta/area_ratio_ablation/${alpha}/daformer_gta_f${i}_result_${alpha}${alpha}.txt"
+#         --save_path "miou_dataset/daformer/gta/alpha_ablation/${alpha}/daformer_gta_f${i}_result_alpha${alpha}.txt"
 #     done
 # done
 
-for ratio in 0.8 0.9 0.95 0.99
+sam_name="fast_sam_default_get_sam_mode2"
+for i in 1 2 3
 do
-    for i in 1 2 3
-    do
-        python miou_cal.py \
-        --gt_dir "${city_gt}" \
-        --pred_dir "/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/adaptive_ratio/da_gta_vith_32_86_92_adaptive_4_${ratio}/fusion${i}_trainid" \
-        --devkit_dir "${dev_dir}" \
-        --save_path "miou_dataset/daformer/gta/adaptive_ratio/adaptive_4_${ratio}/daformer_gta_f${i}_result.txt"
-    done
+    python miou_cal.py \
+    --gt_dir "${city_gt}" \
+    --pred_dir "/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/gta/${sam_name}/fusion${i}_trainid" \
+    --devkit_dir "${dev_dir}" \
+    --save_path "miou_dataset/daformer/gta/sam_params/${sam_name}/daformer_gta_f${i}_result.txt"
 done
+
+# for ratio in 1 # 0.9999
+# do
+#     for i in 1 2 3
+#     do
+#         python miou_cal.py \
+#         --gt_dir "${city_gt}" \
+#         --pred_dir "/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/adaptive_ratio/da_gta_vith_32_86_92_adaptive_4_${ratio}/fusion${i}_trainid" \
+#         --devkit_dir "${dev_dir}" \
+#         --save_path "miou_dataset/daformer/gta/adaptive_ratio/adaptive_4_${ratio}/daformer_gta_f${i}_result.txt"
+#     done
+# done
 
 # for i in 1 2 3
 # do

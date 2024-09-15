@@ -54,13 +54,8 @@ def label_mapping(input, mapping):#主要是因为CityScapes标签里面原类�
     for ind in range(len(mapping)):
         output[input == mapping[ind][0]] = mapping[ind][1]#进行类别映射，最终得到的标签里面之后0-18这19个数加255（背景）
     return np.array(output, dtype=np.int64)#返回映射的标签
-'''
-compute_mIoU函数是以CityScapes图像分割验证集为例来计算mIoU值的
-由于作者个人贡献的原因，本函数除了最主要的计算mIoU的代码之外，还完成了一些其他操作，
-比如进行数据读取，因为原文是做图像分割迁移方面的工作，因此还进行了标签映射的相关工作，在这里笔者都进行注释。
-大家在使用的时候，可以忽略原作者的数据读取过程，只需要注意计算mIoU的时候每张图片分割结果与标签要配对。
-主要留意mIoU指标的计算核心代码即可。
-'''
+
+
 def compute_mIoU(gt_dir, pred_dir, num_classes, synthia, save_path, devkit_dir=''):#计算mIoU的函数
     """
     Compute IoU given the predicted colorized images and 
@@ -83,13 +78,9 @@ def compute_mIoU(gt_dir, pred_dir, num_classes, synthia, save_path, devkit_dir='
     pred_imgs.sort()
     pred_imgs = [join(pred_dir, x) for x in pred_imgs]#获得验证集图像分割结果路径列表，方便直接读取
     
+    print("len(gt_imgs): \t", len(gt_imgs))#打印一下验证集图片数量
+    print("len(pred_imgs): \t", len(pred_imgs))#打印一下验证集标签数量
     assert len(gt_imgs) == len(pred_imgs)#确保验证集图片数量和验证集标签数量一致
-    print(len(gt_imgs))#打印一下验证集图片数量
-
-    # image_path_list = join(devkit_dir, 'val.txt')#在这里打开记录验证集图片名称的txt
-    # label_path_list = join(devkit_dir, 'label.txt')#在这里打开记录验证集标签名称的txt
-    # gt_imgs = open(label_path_list, 'r').read().splitlines()#获得验证集标签名称列表s
-    # pred_imgs = open(image_path_list, 'r').read().splitlines()#获得验证集图像分割结果名称列表
     
     start_time = time.time()
     total_iterations = len(gt_imgs)
@@ -100,7 +91,11 @@ def compute_mIoU(gt_dir, pred_dir, num_classes, synthia, save_path, devkit_dir='
         if len(label.flatten()) != len(pred.flatten()):#如果图像分割结果与标签的大小不一样，这张图片就不计算
             print('Skipping: len(gt) = {:d}, len(pred) = {:d}, {:s}, {:s}'.format(len(label.flatten()), len(pred.flatten()), gt_imgs[ind], pred_imgs[ind]))
             continue
-        hist += fast_hist(label.flatten(), pred.flatten(), num_classes)#对一张图片计算19×19的hist矩阵，并累加
+        image_hist = fast_hist(label.flatten(), pred.flatten(), num_classes)#对一张图片计算19×19的hist矩阵
+        hist += image_hist#对一张图片计算19×19的hist矩阵，并累加
+        # 计算单张图的mIoU
+        mIoU = per_class_iu(image_hist)
+        # print('===> mIoU one image: ' + str(round(np.mean(mIoU) * 100, 2)))
         # hist += fast_hist(label, pred, num_classes)
         if ind > 0 and ind % 100 == 0:#每计算100张就输出一下目前已计算的图片中所有类别平均的mIoU值
             eta = int((time.time() - start_time) / (ind + 1) * (total_iterations - ind - 1))
@@ -183,14 +178,11 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--gt_dir', type=str, help='directory which stores CityScapes val gt images',
-                        default='/media/yons/pool1/ywh/dataset/cityscapes/gtFine/train_all')#设置gt_dir参数，存放验证集分割标签的文件夹
-    parser.add_argument('--pred_dir', type=str, help='directory which stores CityScapes val pred images',
-                        default='/media/yons/pool1/ywh/dataset/cityscapes/gtFine/train_all')#设置pred_dir参数，存放验证集分割结果的文件夹
-    parser.add_argument('--devkit_dir', type=str, help='base directory of cityscapes',
-                        default='/media/yons/pool1/ywh/projects/Segmentation/tools/utils')#设置devikit_dir文件夹，里面有记录图片与标签名称及其他信息的txt文件
+    parser.add_argument('--gt_dir', type=str, help='directory which stores CityScapes val gt images', default='/media/ywh/1/yanweihao/dataset/DensePASS/gtFine/val')#设置gt_dir参数，存放验证集分割标签的文件夹
+    parser.add_argument('--pred_dir', type=str, help='directory which stores CityScapes val pred images', default='/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/DensePASS_val/passv2/vith_default_get_sam_mode_2/fusion1_trainid')#设置pred_dir参数，存放验证集分割结果的文件夹
+    parser.add_argument('--devkit_dir', type=str, help='base directory of cityscapes', default="/media/ywh/1/yanweihao/projects/segmentation/segmentation_tools/utils")#设置devikit_dir文件夹，里面有记录图片与标签名称及其他信息的txt文件
     parser.add_argument('--num_classes', type=int, default=19, help='number of classes')
-    parser.add_argument('--save_path', type=str, default='./eval_result.txt', help='path to save result txt file')
+    parser.add_argument('--save_path', type=str, default='miou_dataset/pass/pass_v2/vith_default_get_sam_mode_2/pass_f1_result.txt', help='path to save result txt file')
     parser.add_argument('--synthia', action='store_true', help='whether to evaluate on synthia')
     args = parser.parse_args()
     main(args)#执行主函数

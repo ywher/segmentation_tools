@@ -8,3 +8,9 @@ python mix_image.py \
 --output_path "${image_root}/mix.png" \
 
 #alpha is the ratio of image2 in the mixed image
+
+python mix_image.py \
+--image1_path "${image_root}/img.png" \
+--image2_path "${image_root}/gt.png" \
+--blending_coefficient 0.5 \
+--output_path "${image_root}/mix.png" \

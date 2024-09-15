@@ -17,8 +17,22 @@
 # done
 
 # densepass val
-data_root="/media/ywh/1/yanweihao/projects/segmentation/segment-anything/tools/outputs/DensePASS_val_vith/gray"
+# data_root="/media/ywh/1/yanweihao/projects/segmentation/segment-anything/tools/outputs/DensePASS_val_vith/gray"
+# python change_file_suffix.py \
+# --folder_path "${data_root}" \
+# --original_suffix "_.png" \
+# --new_suffix ".png"
+
+# 
+# data_root="/media/ywh/1/yanweihao/projects/uda/Trans4PASS/adaptations/pseudo_DensePASS_Trans4PASS_v2_mpa_val_ms_full/pred_label"
+# python change_file_suffix.py \
+# --folder_path "${data_root}" \
+# --original_suffix ".png" \
+# --new_suffix "_labelTrainIds.png"
+
+# acdc
+data_root="/media/ywh/1/yanweihao/projects/uda/HRDA_new/data/acdc/gt/train_pseudo_hrda_acdc_get_sam_mode0"
 python change_file_suffix.py \
 --folder_path "${data_root}" \
---original_suffix "_.png" \
---new_suffix ".png"
+--original_suffix ".png" \
+--new_suffix "_gt_labelTrainIds.png"

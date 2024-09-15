@@ -12,8 +12,9 @@ import cv2
 import os
 import numpy as np
 import pandas as pd
+from natsort import natsorted
 
-def resize_and_concat_images(img_list, target_size, gap=10, image_name='tmp', num_columns=1):
+def resize_and_concat_images(img_list, target_size, gap=10, image_name='tmp', texts=['','','','','',''], num_columns=1):
     """
     Resize and concatenate images horizontally with gaps between them.
 
@@ -22,6 +23,7 @@ def resize_and_concat_images(img_list, target_size, gap=10, image_name='tmp', nu
         target_size (tuple): Target size (width, height) for resizing the images.
         gap (int, optional): Gap size between concatenated images. Default is 10 pixels.
         image_name (str, optional): Name to be displayed on the concatenated image. Default is 'tmp'.
+        texts: List of texts to be displayed on the concatenated image.
         num_columns (int, optional): Number of columns to concatenate the images. Default is 1.
 
     Returns:
@@ -30,9 +32,11 @@ def resize_and_concat_images(img_list, target_size, gap=10, image_name='tmp', nu
     resized_images = []
     num_rows = int(np.ceil(len(img_list) / num_columns))
 
-    for img_path in img_list:
+    for i, img_path in enumerate(img_list):
         img = cv2.imread(img_path)
         resized_img = cv2.resize(img, target_size)
+        # put the text in the right bottom of the resized image
+        cv2.putText(resized_img, texts[i], (target_size[0] - 100, target_size[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1)
         resized_images.append(resized_img)
 
     # Create a blank gap image
@@ -71,20 +75,21 @@ def save_to_csv(file_names, output_path):
     df = pd.DataFrame({'Selected File Names': file_names})
     df.to_csv(output_path, index=False)
 
-def main(folders, resize_size, output_csv_path, gap_size, cols):
+def main(folders, texts, resize_size, output_csv_path, gap_size, cols):
     """
     Main function to display and select images from multiple folders, concatenate and resize them,
     and save the selected file names to a CSV file.
 
     Parameters:
         folders (list): List of folder paths containing images to be displayed and selected.
+        texts: List of texts to be displayed on the concatenated image.
         resize_size (tuple): Target size (width, height) for resizing the images.
         output_csv_path (str): Path of the CSV file to save the selected file names.
         gap_size (int): Gap size between concatenated images.
         cols (int): Number of columns to concatenate the images.
     """
     # Load lists of file names from each folder
-    img_lists = [sorted(os.listdir(folder)) for folder in folders]
+    img_lists = [natsorted(os.listdir(folder)) for folder in folders]
 
     # Initialize the current index of displayed image and list for selected file names
     current_idx = 0
@@ -94,7 +99,7 @@ def main(folders, resize_size, output_csv_path, gap_size, cols):
         # Concatenate and resize images horizontally, then display the concatenated image
         image_name = img_lists[1][current_idx].split('.')[0]
         img = resize_and_concat_images([os.path.join(folder, img_list[current_idx])
-            for folder, img_list in zip(folders, img_lists)], resize_size, gap_size, image_name, cols)
+            for folder, img_list in zip(folders, img_lists)], resize_size, gap_size, image_name, texts, cols)
         cv2.imshow('Concatenated Image', img)
 
         key = cv2.waitKey(0) & 0xFF
@@ -129,19 +134,52 @@ if __name__ == "__main__":
     # folder4_path = "/home/ywh/Documents/paper_writing/media/syn_comparison/mic_base/preds_color"
     # folder5_path = "/home/ywh/Documents/paper_writing/media/syn_comparison/mic_best/preds_color"
     # folders = [folder1_path, folder2_path, folder3_path, folder4_path, folder5_path]
-    folder1_path = '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_gt_color'
-    folder2_path = '/media/ywh/1/yanweihao/projects/uda/DAFormer/work_dirs/local-exp7/gta/230522_2312_gta2cs_dacs_a999_fdthings_rcs001_cpl_daformer_sepaspp_mitb5_poly10warm_s0_ea659/pred_trainid_color'
-    folder3_path = '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/daformer_gta_sam/sam_majority_color'
-    folder4_path = '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/daformer_gta_sam/fusion3_majority_color'
-    folder5_path = '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/daformer_gta_sam/sam_refine_color'
-    folder6_path = '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/daformer_gta_sam/fusion3_color'
     
-    folders = [folder1_path, folder2_path, folder3_path, folder4_path, folder5_path, folder6_path]
+    
+    # folder1_path = '/media/ywh/1/yanweihao/dataset/cityscapes_original/gtFine_trainvaltest/gtFine/train_all_color'
+    # folder2_path = '/media/ywh/1/yanweihao/projects/uda/DAFormer/work_dirs/local-exp7/gta/230522_2312_gta2cs_dacs_a999_fdthings_rcs001_cpl_daformer_sepaspp_mitb5_poly10warm_s0_ea659/pred_trainid_color'
+    # folder3_path = '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/gta/daformer_gta_sam/sam_majority_color'
+    # folder4_path = '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/gta/daformer_gta_sam/fusion3_majority_color'
+    # folder5_path = '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/gta/daformer_gta_sam/sam_refine_color'
+    # folder6_path = '/media/ywh/1/yanweihao/projects/segmentation/segment-anything/outputs/cityscapes/daformer/gta/daformer_gta_sam/fusion3_color'
+    
+    # folders = [folder1_path, folder2_path, folder3_path, folder4_path, folder5_path, folder6_path]
+    
+    # texts = ['gt', 'uda_pred', 'majority', 'majority_f3', 'sgml', 'sgml_f3']
+    # # Input 2: Image resize size
+    # resize_size = (720, 360)  # (width, height)
+
+    # # Input 3: Output path for saving the CSV file
+    # output_csv_path = "output_sam_new.csv"
+    
+    # # Input 4: Gap size between concatenated images
+    # gap_size = 10
+    
+    # # Input 5: Number of columns to concatenate the images
+    # cols = 2
+
+    # # Run the main function
+    # main(folders, texts, resize_size, output_csv_path, gap_size=gap_size, cols=cols)
+    
+    ### densepass
+    # image
+    folder1_path = '/media/ywh/1/yanweihao/dataset/DensePASS/leftImg8bit/val'
+    # gt color
+    folder2_path = '/media/ywh/1/yanweihao/dataset/DensePASS/gtFine/val_color'
+    # ssl v0
+    folder3_path = '/media/ywh/1/yanweihao/projects/uda/Trans4PASS/adaptations/result/CS2DensePASS_Trans4PASS_v2_SSL_v0/pred_color'
+    # ssl f3
+    folder4_path = '/media/ywh/1/yanweihao/projects/uda/Trans4PASS/adaptations/result/CS2DensePASS_Trans4PASS_v2_f3_val/pred_color'
+    
+    folders = [folder1_path, folder2_path, folder3_path, folder4_path]
+    
+    texts = ['img', 'gt', 'ssl v0', 'ssl f3']
+    
     # Input 2: Image resize size
-    resize_size = (360, 180)  # (width, height)
+    resize_size = (1024, 200)  # (width, height)
 
     # Input 3: Output path for saving the CSV file
-    output_csv_path = "output_sam.csv"
+    output_csv_path = "output_pass_val.csv"
     
     # Input 4: Gap size between concatenated images
     gap_size = 10
@@ -150,4 +188,4 @@ if __name__ == "__main__":
     cols = 2
 
     # Run the main function
-    main(folders, resize_size, output_csv_path, gap_size=gap_size, cols=cols)
+    main(folders, texts, resize_size, output_csv_path, gap_size=gap_size, cols=cols)
